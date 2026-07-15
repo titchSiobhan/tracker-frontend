@@ -8,13 +8,14 @@ function Login() {
     const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { setUser, setToken } = useContext(UserContext);
+	const { setUser} = useContext(UserContext);
 
 	async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		console.log('data sending...');
 		const response = await fetch(`${API_URL}auth/login`, {
 			method: 'POST',
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -31,13 +32,6 @@ function Login() {
 			return;
 		}
 
-		if (!data.token) {
-			alert('Login succeeded but no token was returned.');
-			return;
-		}
-
-        localStorage.setItem('token', data.token);
-        setToken(data.token);
 		setUser(data.user);
         
 		navigate('/profile');

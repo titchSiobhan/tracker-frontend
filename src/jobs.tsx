@@ -1,12 +1,13 @@
 import Navbar from "./navbar";
 import {useState, useEffect, useContext} from "react";
 const API_URL = import.meta.env.VITE_API_URL
-
+import { useNavigate} from "react-router";
 import {UserContext} from "./context/userContext";
 
 
 
 function Jobs() {
+    const navigate = useNavigate();
     const [createJobToggle, setCreateJobToggle] = useState(false);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -31,18 +32,25 @@ function Jobs() {
         })
         const data = await response.json();
         console.log(data);
+        getJobs();
+        createJob();
     }
 
     async function getJobs() {
-        const response = await fetch(`${API_URL}job/get`);
+        const response = await authFetch(`${API_URL}job`);
         const data = await response.json();
         console.log(data);
         setJobs(data);
+        
     }
 
     useEffect(() => {
         getJobs();
     }, [])
+
+    function toJob(id: string) {
+        navigate(`/job/${id}`);
+    }
     return (
         <>
         <Navbar />
@@ -57,6 +65,15 @@ function Jobs() {
             <button type="submit">Submit</button>
 
         </form>}
+
+       {
+        jobs.map((job: any) => (
+            <div key={job._id}>
+                <p onClick={() => toJob(job.id)}>{job.name}</p>
+                
+            </div>
+        ))
+       }
         </>
     )
 }

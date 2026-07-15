@@ -1,14 +1,16 @@
 import { Link, useNavigate } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "./context/userContext";
+const API_URL = import.meta.env.VITE_API_URL
 function Navbar() {
     const { setUser, } = useContext(UserContext);
 const navigate = useNavigate();
-    function handleLogout() {
-        localStorage.removeItem('token');
-        navigate('/'); 
-       
+   async function handleLogout() {
+        const response = await fetch(`${API_URL}auth/logout`, { credentials: 'include' });
+        const data = await response.json();
         setUser(null);
+        console.log(data);
+        navigate('/');
         
     }
     return (

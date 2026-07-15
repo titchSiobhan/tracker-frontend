@@ -60,8 +60,7 @@ type Task = {
         const data = await response.json();
        
         setTasks(data);
-        console.log("TASKS FROM BACKEND:", data);
-
+       
     }
 
   

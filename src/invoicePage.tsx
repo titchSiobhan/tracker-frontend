@@ -7,21 +7,27 @@ import { UserContext } from './context/userContext';
 function SingleInvoice() {
 	const { authFetch } = useContext(UserContext);
 	const [invoice, setInvoice] = useState({} as any);
-    const [total, setTotal] = useState(0);
+   
+	const [jobs, setJobs] = useState([]);
 
 	async function getInvoice(id: string) {
 		const response = await authFetch(`${API_URL}invoice/${id}`);
 		const data = await response.json();
 		console.log(data);
 		setInvoice(data);
+		setJobs(data.jobs);
 	}
 	useEffect(() => {
 		getInvoice(window.location.pathname.split('/')[2]);
-        const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(task.task.pricePerUnit), 0).toFixed(2);
-        setTotal(Number(total));
+        
 	}, []);
-
+const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(task.task.pricePerUnit), 0).toFixed(2);
+       
+	
+	const name =jobs?.map((job: any) => job.job.name).join(', ') ;
+	console.log(name);
 	console.log(invoice);
+	console.log(total);
    
 	return (
 		<>
@@ -29,7 +35,9 @@ function SingleInvoice() {
 
 			<div className="invoice">
 				<h2>{invoice.formattedDate?.replace(/\//g, '')}</h2>
-				<p>{invoice.formattedDate}</p>
+				<p>{invoice.formattedDate?.slice(0, 8).split('/').reverse().join('/')}</p>
+				<h2>{name}</h2>
+
                 Total: £{total}
                 {
                     invoice.tasks?.map((task: any) => (

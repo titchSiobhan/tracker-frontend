@@ -9,32 +9,50 @@ const [password, setPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
 
    async function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
-       const response = await fetch(`${API_URL}auth/sign-up`, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-           },
-           body: JSON.stringify({
-               firstName,
-               lastName,
-               email,
-               password
-           })
-           
-       })
-       const data = await response.json();
-       if (!response.ok) {
-           alert(data.error);
-       }
-       return
-       
+    e.preventDefault();
+try {
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        alert("All fields are required");
+        return;
     }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
+
+    const response = await fetch(`${API_URL}auth/sign-up`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            password, confirmPassword
+        })
+        
+
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        alert(data.error || "Signup failed");
+        return;
+    }
+
+    alert("Signup successful!");
+    console.log(data);
+} catch (error) {
+    console.error('error', error);
+    alert("An error occurred during signup.");
+}
+   
+}
+
     return (
         <div>
             <h1>Sign Up</h1>

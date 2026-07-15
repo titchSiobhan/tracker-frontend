@@ -49,7 +49,7 @@ function createInvoice() {
             {
                 invoices.map((invoice: any) => (
                     <div key={invoice.id} onClick={() => getInvoice(invoice.id)}>
-                        <p>{invoice.formattedDate.replace('/', '').replace('/', '')}</p>
+                        <p>{invoice.formattedDate.split('/').join('')}</p>
                     </div>
                 ))
             }
