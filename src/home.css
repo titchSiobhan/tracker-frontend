@@ -1,0 +1,64 @@
+
+
+.task-area {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    grid-row-start: 1;
+    grid-column:7/ -1;
+    justify-self: center;
+    align-self: center;
+    padding: 1rem;
+    overflow-y: auto;
+    border: 1px solid var(--accent1);
+    width: 90%;
+    height: 90%;
+    box-shadow: var(--accent1) 0px 4px 12px;
+
+}
+
+.job-area{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+     justify-self: center;
+    align-self: center;
+    grid-row-start: 1;
+    grid-column: 3/7;
+    padding: 1rem;
+    border: 1px solid var(--accent1);
+    width: 90%;
+    height: 90%;
+    overflow-y: auto;
+    box-shadow: var(--accent1)  0px 4px 12px;
+}
+
+.task{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 0;
+}
+
+.clients, .task-box {
+   padding: 1rem 0;
+}
+
+.go-to-jobs {
+    text-decoration: underline;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+   
+}
+
+.go-to-jobs:hover {
+    color: var(--accent1);
+    
+}
+

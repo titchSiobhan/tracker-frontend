@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
-import { UserContext } from './context/userContext';
+import { UserContext } from '../context/userContext';
 import  {useNavigate } from 'react-router';
-
+import './log.css';
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Login() {
@@ -38,7 +38,7 @@ function Login() {
 	}
 
 	return (
-		<>
+		<div className="login">
 			<h1>Login</h1>
 			<form onSubmit={submitLogin}>
 				<input
@@ -53,7 +53,7 @@ function Login() {
 				/>
 				<button type="submit">Login</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

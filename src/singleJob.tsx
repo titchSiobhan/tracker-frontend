@@ -1,4 +1,4 @@
-import Navbar from "./navbar";
+import Navbar from "./components/navbar";
 import {useState, useContext, useEffect} from "react";
 const API_URL = import.meta.env.VITE_API_URL
 import { UserContext } from "./context/userContext";
@@ -40,25 +40,29 @@ const navigate = useNavigate();
     return (
         <>
         <Navbar />
-
+        
+<div className="jobs-client">
+    <div className="back">
+			<button onClick={() => navigate(-1)}>Back</button>
+		</div>
         <div className="job">
             <h2>{job.name}</h2>
-            <p>{job.address}</p>
-            <p>{job.startDate}</p>
-            <p>{job.endDate}</p>
+            <p>{job.street}</p>
+            <p>{job.town}</p>
+            <p>{job.postcode}</p>
         </div>
 
         <div className="invoices">
             <h2>Invoices</h2>
-         { invoices.length > 0 ?
-            invoices.map((invoice: any) => (
-                <div key={invoice.invoice.id} className="invoice">
+         { invoices?.length > 0 ?
+            invoices?.map((invoice: any) => (
+                <div key={invoice.invoice.id} className="invoice-list">
                     <p onClick={() => goToInvoice(invoice.invoice.id)}>{format(invoice.invoice.invoiceNumber, 'dd/MM/yyyy/hh').split('/').join('')}</p>
                 </div>  
             )) : <p>No Invoices</p>
          }
         </div>
-       
+       </div>
 
         </>
     )

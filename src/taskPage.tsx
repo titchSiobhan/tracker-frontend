@@ -1,7 +1,7 @@
-import Navbar from "./navbar";
+import Navbar from "./components/navbar";
 import { useState, useContext, useEffect  } from "react";
 const API_URL = import.meta.env.VITE_API_URL
-
+import { useNavigate } from "react-router";
 import { UserContext } from "./context/userContext";
 
 function TaskPage() {
@@ -13,6 +13,7 @@ const [pricePerUnit, setPricePerUnit] = useState('');
 const { authFetch } = useContext(UserContext);
 const [tasks, setTasks] = useState<Task[]>([]);
 const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
+const navigate = useNavigate();
 
 function toggleCreateTask() {
     setCreateTaskToggle(prev => !prev);
@@ -107,6 +108,10 @@ type Task = {
     return (
         <>
             <Navbar />
+            <div className="back">
+			<button onClick={() => navigate(-1)}>Back</button>
+		</div>
+            <div className="task-create">
             <button onClick={toggleCreateTask}>Create Task</button>
 
             {createTaskToggle && (
@@ -162,6 +167,8 @@ type Task = {
                         }
                     </div>
                 ))}
+            </div>
+            
             </div>
         </>
     )

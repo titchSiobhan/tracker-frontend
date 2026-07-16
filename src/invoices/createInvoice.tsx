@@ -1,8 +1,17 @@
 import { useState, useContext, useEffect } from 'react';
 const API_URL = import.meta.env.VITE_API_URL;
-import { UserContext } from './context/userContext';
+import { UserContext } from '../context/userContext';
 
-function CreateInvoicePage() {
+type CreateInvoicePageProps = {
+	createInvoice: () => void;
+	setInvoices: React.Dispatch<React.SetStateAction<any[]>>;
+	invoices: any[];
+};
+
+
+function CreateInvoicePage({ createInvoice,setInvoices, invoices}: CreateInvoicePageProps)  {
+  
+
 	const { authFetch } = useContext(UserContext);
 	type Task = {
 		id: string;
@@ -62,6 +71,8 @@ function CreateInvoicePage() {
 		});
 		const data = await response.json();
 		console.log(data);
+		createInvoice();
+		window.location.reload();
 	}
 
 	async function getJobs() {
@@ -74,6 +85,8 @@ function CreateInvoicePage() {
 	const categories = [...new Set(tasks.map((task) => task.category))];
 	return (
 		<>
+		<div className="create-invoice">
+			<div className="close" onClick={createInvoice}>X</div>
 			<div className="filter">
 				<select
 					value={selectedCategory}
@@ -88,6 +101,7 @@ function CreateInvoicePage() {
 				</select>
 			</div>
 			<div className="invoice">
+				
 				<div className="choosePerson">
 					<select value={jobId} onChange={(e) => setJobId(e.target.value)}>
 						<option value="">Select job</option>
@@ -107,7 +121,7 @@ function CreateInvoicePage() {
 					<p>{task.title}</p>
 
 					<p>{task.category}</p>
-					<p>{task.pricePerUnit} </p>
+					<p>£{task.pricePerUnit} </p>
 					<button onClick={() => setBasket([...basket, task])}>
 						Add to basket
 					</button>
@@ -121,7 +135,7 @@ function CreateInvoicePage() {
 								Remove from basket
 							</button>
 
-							<button
+							{/* <button
 								onClick={() => {
 									const index = basket.findIndex((b) => b.id === task.id);
 									if (index !== -1) {
@@ -132,22 +146,23 @@ function CreateInvoicePage() {
 								}}
 							>
 								-
-							</button>
+							</button> */}
 
 							<p>
 								Quantity: {basket.filter((b) => b.id === task.id).length}
-								<button
+								{/* <button
 									onClick={() => {
 										setBasket([...basket, task]);
 									}}
 								>
 									+
-								</button>
+								</button> */}
 							</p>
 						</>
 					)}
 				</div>
 			))}
+			</div>
 		</>
 	);
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 const  API_URL = import.meta.env.VITE_API_URL
+import './log.css'
 
 function SignUp() {
 const [firstName, setFirstName] = useState('');
@@ -54,7 +55,7 @@ try {
 }
 
     return (
-        <div>
+        <div className="signup-container">
             <h1>Sign Up</h1>
             <form onSubmit={handleSignUp}>
                

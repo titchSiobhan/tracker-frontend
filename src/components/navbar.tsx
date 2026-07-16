@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useContext } from "react";
-import { UserContext } from "./context/userContext";
+import { UserContext } from "../context/userContext";
+import "./navbar.css"
 const API_URL = import.meta.env.VITE_API_URL
 function Navbar() {
     const { setUser, } = useContext(UserContext);
@@ -14,26 +15,28 @@ const navigate = useNavigate();
         
     }
     return (
+        <>
         <nav>
             <ul>
-                <li>
+                <li className="Link">
                     <Link to="/">Home</Link>
                 </li>
-                <li>
+                <li className="Link">
                     <Link to="/profile">Profile</Link>
                 </li>
               
-                <li>
+                <li className="Link">
                     <Link to="/invoice">Invoice</Link>
                 </li>
-                <li>
-                    <Link to="/jobs">Jobs</Link>
+                <li className="Link">
+                    <Link to="/jobs">Clients</Link>
                 </li>
-                <li>
-                    <p onClick={handleLogout}>Logout</p>
+                <li className="logout Link" onClick={handleLogout}>
+                    <p >Logout</p>
                 </li>
             </ul>
         </nav>
+        </>
     );
 }
 

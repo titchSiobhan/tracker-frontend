@@ -1,18 +1,18 @@
-import Navbar from "./navbar";
+import Navbar from "./components/navbar";
 import {useState, useEffect, useContext} from "react";
 const API_URL = import.meta.env.VITE_API_URL
 import { useNavigate} from "react-router";
 import {UserContext} from "./context/userContext";
-
+import "./jobs.css"
 
 
 function Jobs() {
     const navigate = useNavigate();
     const [createJobToggle, setCreateJobToggle] = useState(false);
     const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [street, setStreetAddress] = useState('');
+    const [town, setTown] = useState('');
+    const [postcode, setPostcode] = useState('');
     const { authFetch } = useContext(UserContext);
     const [ jobs, setJobs] = useState([]);
 
@@ -22,7 +22,7 @@ function Jobs() {
 
     async function createAJob(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const job = {name, address, startDate, endDate};
+        const job = {name, street, town, postcode};
         const response = await authFetch(`${API_URL}job/create`, {
             method: 'POST',
             headers: {
@@ -54,26 +54,32 @@ function Jobs() {
     return (
         <>
         <Navbar />
-        <button onClick={createJob}>Create Job</button>
+        <div className="job-section">
+            
+        <button onClick={createJob} className="btn">Create Job</button>
 
 
-       {createJobToggle && <form onSubmit={createAJob}>
+       {createJobToggle && 
+       <div className="create-task"><form onSubmit={createAJob}>
             <input type="text" placeholder="Name" required onChange={(e) => setName(e.target.value)}/>
-            <input type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)}/>
-            <input type="date" placeholder="Start Date" onChange={(e) => setStartDate(e.target.value)}/>
-            <input type="date" placeholder="End Date" onChange={(e) => setEndDate(e.target.value)}/>
+            <input type="text" placeholder="Street" onChange={(e) => setStreetAddress(e.target.value)}/>
+            <input type="text" placeholder="Town" onChange={(e) => setTown(e.target.value)}/>
+            <input type="text" placeholder="Post code" onChange={(e) => setPostcode(e.target.value)}/>
             <button type="submit">Submit</button>
 
-        </form>}
+        </form>
+        </div>
+}
 
        {
         jobs.map((job: any) => (
-            <div key={job._id}>
+            <div key={job._id} className="job">
                 <p onClick={() => toJob(job.id)}>{job.name}</p>
                 
             </div>
         ))
        }
+       </div>
         </>
     )
 }
