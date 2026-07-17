@@ -11,27 +11,46 @@ function Profile() {
     const { user, authFetch } = useContext(UserContext);
     const [settings, setSettings] = useState(false);
    const [company, setCompany] = useState<Company[]>([]);
+   const [uploadLogoToggle, setUploadLogoToggle] = useState(false);
 
 
    
     function settingsToggle() {
         setSettings(prev => !prev);
     }
+function LogoToggle() {
+    setUploadLogoToggle(prev => !prev);
+}
 
+async function uploadLogo(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const response = await fetch(`${API_URL}company/upload/${user.company.id}`, {
+        method: 'PUT',
+        credentials: 'include',
+        body: formData
+    })
+    const data = await response.json();
+    console.log(data);
+    setCompany(data.company);
+}
     async function getCompany() {
-    const response = await authFetch(`${API_URL}company`);
+    const response = await authFetch(`${API_URL}company/${user.company.id}`);
     const data = await response.json();
     console.log(data);
     setCompany(data);
 
 }
+
 type Company = {
+  id: string
   companyName: string
   email: string
   phoneNumber: string
   sortCode?: string
   accountNumber?: string
   accountName?: string
+  companyImageLarge?: string
 }
 
 
@@ -61,7 +80,14 @@ console.log(company, 'company')
                 {settings && (
                     <>
                     <Link to="/tasks">Edit Tasks</Link>
+                    <button className="upload-logo" onClick={LogoToggle}>Upload Logo</button>{uploadLogoToggle && (
+                        <form encType="multipart/form-data" onSubmit={uploadLogo}>
+                            <input type="file" name="image" accept="image/*"/>
+                            <button type="submit">Upload</button>
+                        </form>
+                    )}
                     <CompanySettings />
+                    
                     </>
                 )}
                 </>

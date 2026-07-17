@@ -45,7 +45,7 @@ function createInvoice() {
             {
                 createInvoiceToggle && (
                     <div>
-                       <CreateInvoicePage createInvoice={createInvoice} setInvoices={setInvoices} invoices={invoices}/>
+                       <CreateInvoicePage createInvoice={createInvoice}/>
                     </div>
                 )
             }

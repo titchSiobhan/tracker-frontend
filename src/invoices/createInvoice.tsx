@@ -4,12 +4,10 @@ import { UserContext } from '../context/userContext';
 
 type CreateInvoicePageProps = {
 	createInvoice: () => void;
-	setInvoices: React.Dispatch<React.SetStateAction<any[]>>;
-	invoices: any[];
-};
+}
 
 
-function CreateInvoicePage({ createInvoice,setInvoices, invoices}: CreateInvoicePageProps)  {
+function CreateInvoicePage({ createInvoice}: CreateInvoicePageProps)  {
   
 
 	const { authFetch } = useContext(UserContext);

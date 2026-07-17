@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "date-fns": "^4.4.0",
+    "html2pdf-ts": "^1.2.23",
+    "html2pdf.js": "^0.14.0",
+    "multer": "^2.2.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-hook-form": "^7.80.0",

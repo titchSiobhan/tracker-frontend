@@ -4,13 +4,32 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/userContext';
 import { useNavigate } from 'react-router';
 
+// @ts-ignore
+import html2pdf from "html2pdf.js/dist/html2pdf.bundle.js";
+
+
+
+
 
 function SingleInvoice() {
 	const { authFetch, user } = useContext(UserContext);
 	const [invoice, setInvoice] = useState({} as any);
    const navigate = useNavigate();
 	const [jobs, setJobs] = useState<Job[]>([]);
+ function downloadPDF() {
+    const element = document.getElementById("invoice");
+    if (!element) return;
 
+    html2pdf()
+        .from(element)
+        .set({
+            margin: 10,
+            filename: `${invoiceName}.pdf`,
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+        })
+        .save();
+}
 	async function getInvoice(id: string) {
 		const response = await authFetch(`${API_URL}invoice/${id}`);
 		const data = await response.json();
@@ -32,26 +51,36 @@ const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(ta
 			postcode: string;
 		};
 	   }
-	
+	const invoiceName = invoice.formattedDate?.replace(/\//g, '')
 	const name =jobs?.map((job: any) => job.job.name).join(', ') ;
 	console.log(user)
+console.log(user?.company?.companyImageLarge)
+	if (!user) return <p>Loading...</p>;
 	return (
 		<>
 			<Navbar />
 			<div className="invoice-single">
+				<div className="btns">
 		<div className="back">
 			<button onClick={() => navigate(-1)}>Back</button>
 		</div>
 		<div className="download">
-			<button onClick={() => window.print()}>Download</button>
-		</div>
-			<div className="invoice">
+			<button onClick={downloadPDF}>Download</button>
+		</div></div>
+			<div className="invoice" id="invoice">
 				
 				
-				<h2 className="number">Invoice: {invoice.formattedDate?.replace(/\//g, '')}</h2>
 				
+				<img
+  src={`http://localhost:3000/uploads/${encodeURIComponent(user.company.companyImageLarge)}`}
+  alt="Company Logo" className="logo"
+/>
+<h2 className="number">Invoice: {invoiceName}</h2>
 
 			{user  && <div className="company">
+				
+
+
 				<h2>{user?.company.companyName}</h2>
 			<h3>{user.firstName} {user.lastName}</h3>
 				<p className="email">Email: {user.company.email}</p>
@@ -81,11 +110,11 @@ const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(ta
 				<p className="total"> Total: £{total}
 				</p>
 
-				<div className="payment">
+			{	user?.company && <div className="payment">
 					<p>Sort Code: {user.company.sortCode}</p>
 					<p>Account Number: {user.company.accountNumber}</p>
 					<p>Account Name: {user.company.accountName}</p>
-				</div>
+				</div>}
 			</div>
 			</div>
 		</>

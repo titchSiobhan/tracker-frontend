@@ -33,13 +33,29 @@
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    border: 1px solid var(--accent1);
+   
     border-radius: 5px;
     padding: 1.5rem ;
     box-shadow: var(--accent1) 0px 4px 12px;
   
 }
+.btns {
+    display: flex;
+    width: 500px;
+}
 
+.btns button {
+    width: 100px;
+    height: 60px;
+   
+}
+.logo {
+    width: clamp(150px, 50%, 200px);
+    height: auto;
+    max-height: 150px;
+    display: flex;
+ padding: 1rem 0 0 2rem ;
+}
 .task {
     display: flex;
     flex-direction: row;
