@@ -62,3 +62,17 @@
     
 }
 
+
+
+.click {
+    cursor: pointer;
+    
+    padding: 1rem;
+    margin:  0.6rem 0;
+}
+
+.task-click {
+
+    padding: 1rem;
+    margin:  0.6rem 0;
+}

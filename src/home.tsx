@@ -27,6 +27,12 @@ function Home() {
 		setJobs(data);
 	}
 
+	 function toJob(id: string) {
+        navigate(`/job/${id}`);
+    }
+
+	
+
 	useEffect(() => {
 		getTasks();
 		getJobs();
@@ -59,11 +65,11 @@ function Home() {
 
 							{tasks.length > 0 ? (
 								tasks.map((task: any) => (
-									<div className="task tasks" key={task.id}>
+									<div className="task tasks task-click" key={task.id}>
 										<h3>{task.title}</h3>
 										<p>{task.description}</p>
 										<p>{task.category}</p>
-										<p>{task.pricePerUnit}</p>
+										<p>£{task.pricePerUnit}</p>
 									</div>
 								))
 							) : (
@@ -78,11 +84,9 @@ function Home() {
 						</div>
 						{jobs.length > 0 ? (
 							jobs.map((job: any) => (
-								<div className="task" key={job.id}>
-									<h3>{job.name}</h3>
-									<p>{job.address}</p>
-									<p>{job.startDate}</p>
-									<p>{job.endDate}</p>
+								<div className="task click" key={job.id}>
+									<h3 onClick={() => toJob(job.id)}>{job.name}</h3>
+									
 								</div>
 							))
 						) : (

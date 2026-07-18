@@ -34,18 +34,20 @@ function Login() {
 
 		setUser(data.user);
         
-		navigate('/profile');
+		navigate('/');
 	}
 
 	return (
 		<div className="login">
 			<h1>Login</h1>
 			<form onSubmit={submitLogin}>
+				<label htmlFor="email">Email:</label>
 				<input
 					type="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
+				<label htmlFor="password">Password:</label>
 				<input
 					type="password"
 					value={password}

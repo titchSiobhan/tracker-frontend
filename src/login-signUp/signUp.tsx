@@ -59,15 +59,15 @@ try {
             <h1>Sign Up</h1>
             <form onSubmit={handleSignUp}>
                
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} />
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="firstName">First Name:</label>
                 <input type="text" id="firstName" name="firstName" required onChange={(e) => setFirstName(e.target.value)} />
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor="lastName">Last Name:</label>
                 <input type="text" id="lastName" name="lastName" required onChange={(e) => setLastName(e.target.value)} />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password:</label>
                 <input type="password" id="password" name="password" required onChange={(e) => setPassword(e.target.value)} />
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">Confirm Password:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required onChange={(e) => setConfirmPassword(e.target.value)} />
                 <button type="submit">Sign Up</button>
             </form>

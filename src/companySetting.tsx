@@ -13,6 +13,15 @@ type Company = {
 };
 
 function CompanySettings() {
+	const [createCompanyState, setCreateCompanyState] = useState<Company>({
+		id: '',
+		companyName: '',
+		phoneNumber: '',
+		email: '',
+		sortCode: '',
+		accountNumber: '',
+		accountName: '',
+	});
 	const [company, setCompany] = useState<Company>({
 		id: '',
 		companyName: '',
@@ -27,10 +36,13 @@ function CompanySettings() {
 		const response = await authFetch(`${API_URL}company`);
 		const data = await response.json();
 		console.log(data);
-		if (data) setCompany(data[0]);
+		if (Array.isArray(data) && data.length > 0) {
+    setCompany(data[0]);
+}
+
 	}
 
-	console.log(company);
+
 	async function createCompany(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
@@ -39,7 +51,7 @@ function CompanySettings() {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(company),
+			body: JSON.stringify(createCompanyState),
 		});
 		const data = await response.json();
 		console.log(data);
@@ -60,6 +72,7 @@ function CompanySettings() {
 	useEffect(() => {
 		getCompany();
 	}, []);
+	
 	const hasCompany = company && company.companyName !== '';
 	console.log(hasCompany);
 	return (
@@ -72,6 +85,7 @@ function CompanySettings() {
 							upDateCompany(company.id);
 						}}
 					>
+						<label htmlFor="companyName">Company Name</label>
 						<input
 							type="text"
 							value={company.companyName}
@@ -79,6 +93,7 @@ function CompanySettings() {
 								setCompany({ ...company, companyName: e.target.value })
 							}
 						/>
+						< label htmlFor="phoneNumber">Phone Number</label>
 						<input
 							type="text"
 							value={company.phoneNumber}
@@ -86,6 +101,7 @@ function CompanySettings() {
 								setCompany({ ...company, phoneNumber: e.target.value })
 							}
 						/>
+						<label htmlFor="email">Email</label>
 						<input
 							type="text"
 							value={company.email}
@@ -93,6 +109,7 @@ function CompanySettings() {
 								setCompany({ ...company, email: e.target.value })
 							}
 						/>
+						<label htmlFor="sortCode">Sort Code</label>
 						<input
 							type="text"
 							value={company.sortCode}
@@ -100,6 +117,7 @@ function CompanySettings() {
 								setCompany({ ...company, sortCode: e.target.value })
 							}
 						/>
+						<label htmlFor="accountNumber">Account Number</label>
 						<input
 							type="text"
 							value={company.accountNumber}
@@ -107,6 +125,7 @@ function CompanySettings() {
 								setCompany({ ...company, accountNumber: e.target.value })
 							}
 						/>
+						<label htmlFor="accountName">Account Name</label>
 						<input
 							type="text"
 							value={company.accountName}
@@ -119,48 +138,81 @@ function CompanySettings() {
 				</>
 			) : (
 				<form onSubmit={createCompany}>
-					<input
-						type="text"
-						placeholder="Company Name"
-						onChange={(e) =>
-							setCompany({ ...company, companyName: e.target.value })
-						}
-					/>
-					<input
-						type="text"
-						placeholder="Phone Number"
-						onChange={(e) =>
-							setCompany({ ...company, phoneNumber: e.target.value })
-						}
-					/>
-					<input
-						type="text"
-						placeholder="Email"
-						onChange={(e) => setCompany({ ...company, email: e.target.value })}
-					/>
-					<input
-						type="text"
-						placeholder="Sort Code"
-						onChange={(e) =>
-							setCompany({ ...company, sortCode: e.target.value })
-						}
-					/>
-					<input
-						type="text"
-						placeholder="Account Number"
-						onChange={(e) =>
-							setCompany({ ...company, accountNumber: e.target.value })
-						}
-					/>
-					<input
-						type="text"
-						placeholder="Account Name"
-						onChange={(e) =>
-							setCompany({ ...company, accountName: e.target.value })
-						}
-					/>
-					<button type="submit">Save</button>
-				</form>
+    <label htmlFor="companyName">Company Name</label>
+    <input
+        type="text"
+        placeholder="Company Name"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                companyName: e.target.value
+            })
+        }
+    />
+
+    <label htmlFor="phoneNumber">Phone Number</label>
+    <input
+        type="text"
+        placeholder="Phone Number"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                phoneNumber: e.target.value
+            })
+        }
+    />
+
+    <label htmlFor="email">Email</label>
+    <input
+        type="text"
+        placeholder="Email"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                email: e.target.value
+            })
+        }
+    />
+
+    <label htmlFor="sortCode">Sort Code</label>
+    <input
+        type="text"
+        placeholder="Sort Code"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                sortCode: e.target.value
+            })
+        }
+    />
+
+    <label htmlFor="accountNumber">Account Number</label>
+    <input
+        type="text"
+        placeholder="Account Number"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                accountNumber: e.target.value
+            })
+        }
+    />
+
+    <label htmlFor="accountName">Account Name</label>
+    <input
+        type="text"
+        placeholder="Account Name"
+        onChange={(e) =>
+            setCreateCompanyState({
+                ...createCompanyState,
+                accountName: e.target.value
+            })
+        }
+    />
+
+    <button type="submit">Save</button>
+</form>
+
 			)}
 		</>
 	);

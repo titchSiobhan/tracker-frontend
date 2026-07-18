@@ -3,14 +3,14 @@ import { useState, useContext, useEffect } from "react";
 import CreateInvoicePage from "./createInvoice";
 import { UserContext } from "../context/userContext";
 const API_URL = import.meta.env.VITE_API_URL;
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import "./invoice.css"
 
 
 function Invoice() {
 const [createInvoiceToggle, setCreateInvoiceToggle] = useState(false);
 const [invoices, setInvoices] = useState<any[]>([]);
-const { authFetch } = useContext(UserContext);
+const { authFetch, user } = useContext(UserContext);
 const navigate = useNavigate();
 
 
@@ -36,7 +36,16 @@ function createInvoice() {
     setCreateInvoiceToggle(prev => !prev);
 }
 
-
+if (!user.company) 
+		{
+		return (
+			<div className="no-company">
+			<Navbar />
+			<p>Add a company in profile settings</p>
+			<Link to="/profile">Profile</Link>
+			</div>
+		)
+	}
     return (
         <>
             <Navbar />

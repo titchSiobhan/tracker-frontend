@@ -56,7 +56,7 @@ function Jobs() {
         <Navbar />
         <div className="job-section">
             
-        <button onClick={createJob} className="btn">Create Job</button>
+        <button onClick={createJob} className="btn">Add Client</button>
 
 
        {createJobToggle && 

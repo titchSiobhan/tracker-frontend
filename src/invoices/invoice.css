@@ -56,7 +56,7 @@
     display: flex;
  padding: 1rem 0 0 2rem ;
 }
-.task {
+.task, .table {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -66,7 +66,7 @@
     padding: 0 2rem;
 }
 
-.task-invoice p {
+.task-invoice p, .table p {
     text-align: left;
     width: 50%;
 
@@ -152,3 +152,38 @@
     padding: 2rem;
 }
 
+
+
+.quantity {
+    display: flex;
+  
+    width: 100%;
+    position: relative;
+    right: 1px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.date {
+    width: 30%;
+    text-align: center;
+    padding: 0 2rem;
+    position: relative;
+    right: 1px;
+}
+
+.no-company {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    justify-content: center;
+    padding: 0 2rem;
+    grid-column: 3/-1;
+    align-items: center;
+    grid-row-start: 1;
+    justify-self: center;
+    position: relative;
+    margin: 1rem;
+}

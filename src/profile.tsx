@@ -78,17 +78,18 @@ console.log(company, 'company')
                 <>
                 <button onClick={settingsToggle}>Settings</button>
                 {settings && (
-                    <>
-                    <Link to="/tasks">Edit Tasks</Link>
-                    <button className="upload-logo" onClick={LogoToggle}>Upload Logo</button>{uploadLogoToggle && (
+                    <div className="settings">
+                    <Link to="/tasks" className="settings-btn">Edit Tasks</Link>
+                    <CompanySettings />
+                    <button className="upload-logo settings-btn" onClick={LogoToggle}>Upload Logo</button>{uploadLogoToggle && (
                         <form encType="multipart/form-data" onSubmit={uploadLogo}>
                             <input type="file" name="image" accept="image/*"/>
-                            <button type="submit">Upload</button>
+                            <button type="submit" className="settings-btn" >Upload</button>
                         </form>
                     )}
-                    <CompanySettings />
                     
-                    </>
+                    
+                    </div>
                 )}
                 </>
             )}

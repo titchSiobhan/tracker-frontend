@@ -2,7 +2,7 @@ import Navbar from '../components/navbar';
 const API_URL = import.meta.env.VITE_API_URL;
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/userContext';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 
 // @ts-ignore
 import html2pdf from "html2pdf.js/dist/html2pdf.bundle.js";
@@ -41,7 +41,9 @@ function SingleInvoice() {
 		getInvoice(window.location.pathname.split('/')[2]);
         
 	}, []);
-const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(task.task.pricePerUnit), 0).toFixed(2);
+
+
+
 	   type Job = {
 		id: string;
 		job: {
@@ -54,8 +56,24 @@ const total = invoice?.tasks?.reduce((sum: number, task: any) => sum + Number(ta
 	const invoiceName = invoice.formattedDate?.replace(/\//g, '')
 	const name =jobs?.map((job: any) => job.job.name).join(', ') ;
 	console.log(user)
-console.log(user?.company?.companyImageLarge)
+
+	const total = invoice.tasks?.reduce((sum:number, item: any) => {
+		const price = Number(item.task.pricePerUnit);
+		return sum + price * item.quantity;
+	}, 0)
+
+	if (!user.company) 
+		{
+		return (
+			<>
+			<Navbar />
+			<p>Add a company</p>
+			<Link to="/profile">Profile</Link>
+			</>
+		)
+	}
 	if (!user) return <p>Loading...</p>;
+	
 	return (
 		<>
 			<Navbar />
@@ -70,11 +88,12 @@ console.log(user?.company?.companyImageLarge)
 			<div className="invoice" id="invoice">
 				
 				
-				
+				{ user?.company?.companyImageLarge ?
 				<img
   src={`http://localhost:3000/uploads/${encodeURIComponent(user.company.companyImageLarge)}`}
   alt="Company Logo" className="logo"
-/>
+/> : <></>
+}
 <h2 className="number">Invoice: {invoiceName}</h2>
 
 			{user  && <div className="company">
@@ -97,13 +116,21 @@ console.log(user?.company?.companyImageLarge)
 				</div>
 
                
+			   <div className="table">
+				<p> </p>
+				<p>Quantity</p>
+				
+				<p className="price">Price</p>
+				<p className="price">Subtotal</p>
+			   </div>
                 {
                     invoice.tasks?.map((task: any) => (
                         <div key={task.taskId} className="task-invoice task">
                             <p className="title">{task.task.title}</p>
-                            <p>{task.task.description}</p>
-                            <p>{task.task.category}</p>
-                            <p className="price">£{task.task.pricePerUnit}</p>
+                            <p>{task.quantity}</p>
+                           
+                            <p className="price">£{task.task.pricePerUnit }</p>
+							<p className="price">£{task.task.pricePerUnit * task.quantity}</p>
                         </div>
                     ))
                 } 
