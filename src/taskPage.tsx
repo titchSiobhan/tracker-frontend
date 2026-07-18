@@ -135,7 +135,7 @@ type Task = {
 
             <div>
                 {tasks.map((task: any) => (
-                    <div key={task.id}>
+                    <div key={task.id} className="group-tasks">
                         <h1>{task.title}</h1>
                         <p>{task.description}</p>
                         <p>{task.category}</p>

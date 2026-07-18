@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
    
+
 }
 
 :root {
@@ -62,4 +63,8 @@ button {
     justify-self: center;
     position: relative;
     margin: 1rem;
+}
+
+.group-tasks {
+padding: 0 2rem;
 }

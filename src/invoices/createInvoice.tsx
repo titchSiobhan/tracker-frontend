@@ -138,7 +138,7 @@ function CreateInvoicePage({ createInvoice }: CreateInvoicePageProps) {
 				{filteredTasks.map((task: any) => (
 					<div key={task.id}>
 						<p>{task.title}</p>
-
+						<p>{task.description}</p>
 						<p>{task.category}</p>
 						<p>£{task.pricePerUnit} </p>
 						<button

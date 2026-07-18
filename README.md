@@ -1,73 +1,100 @@
-# React + TypeScript + Vite
+# Invoice Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack invoice management application built with **React**, **TypeScript**, **Node.js**, **Express**, and **PostgreSQL**.
 
-Currently, two official plugins are available:
+Designed for freelancers, contractors, and small businesses to quickly create, manage, and export professional invoices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Invoice Management
 
-## Expanding the ESLint configuration
+- Create invoices with custom issue and due dates
+- Add tasks with quantity, unit price, and category
+- Automatically format invoice dates
+- View all invoices or retrieve individual invoices
+- Export invoices as PDF
+- Upload and display a company logo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Company Profile
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Store company information
+- Upload a company logo
+- Automatically include company details on invoices
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Authentication
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Secure user authentication
+- User-specific invoice management
+
+---
+
+## Invoice Layout
+
+Each generated invoice includes:
+
+- Company logo
+- Invoice number
+- Company information
+- Customer details
+- Itemised task list
+- Quantity, unit price, and totals
+- Grand total
+- Clean A4/letter-style printable layout
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- html2pdf.js
+
+### Backend
+
+- Node.js
+- Express
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- Multer
+
+---
+
+## Installation
+
+### Clone the repository
+
+```bash
+git clone <https://github.com/titchSiobhan/tracker-frontend>
+cd invoice-maker
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Backend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd backend
+npm install
+npm run dev
 ```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+
+
+## License
+
+This project is provided for portfolio and demonstration purposes only.
+
+All rights are reserved. You may not copy, modify, distribute, or use this code without prior written permission.

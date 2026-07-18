@@ -36,7 +36,7 @@ function createInvoice() {
     setCreateInvoiceToggle(prev => !prev);
 }
 
-if (!user.company) 
+if (!user?.company) 
 		{
 		return (
 			<div className="no-company">

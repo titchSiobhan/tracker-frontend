@@ -15,6 +15,7 @@ function Profile() {
 
 
    
+   
     function settingsToggle() {
         setSettings(prev => !prev);
     }
@@ -35,12 +36,17 @@ async function uploadLogo(e: React.FormEvent<HTMLFormElement>) {
     setCompany(data.company);
 }
     async function getCompany() {
+        
+            
     const response = await authFetch(`${API_URL}company/${user.company.id}`);
     const data = await response.json();
-    console.log(data);
+    console.log(data, 'data');
     setCompany(data);
 
 }
+console.log(company, 'company')
+console.log(user, 'user')
+console.log(user?.company?.id, 'company user')
 
 type Company = {
   id: string
@@ -65,11 +71,11 @@ console.log(company, 'company')
             {user ? (
                 <div className="profile">
                  <h1> Hi {user.firstName} {user.lastName} </h1>
-               {company.length > 0 && (
+               {company && (
   <>
-    <h2>Company: {company[0].companyName}</h2>
-    <h2>Email: {company[0].email}</h2>
-    <h2>Phone Number: {company[0].phoneNumber}</h2>
+    <h2>Company: {user?.company?.companyName}</h2>
+    <h2>Email: {user?.company?.email}</h2>
+    <h2>Phone Number: {user?.company?.phoneNumber}</h2>
   </>
 )}
 

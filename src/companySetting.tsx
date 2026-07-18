@@ -66,7 +66,7 @@ function CompanySettings() {
 		});
 		const data = await response.json();
 		console.log(data);
-		setCompany(data.company);
+		setCompany(data);
 	}
 
 	useEffect(() => {
