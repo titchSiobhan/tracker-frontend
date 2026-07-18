@@ -67,7 +67,7 @@ function Home() {
 								tasks.map((task: any) => (
 									<div className="task tasks task-click" key={task.id}>
 										<h3>{task.title}</h3>
-										<p>{task.description}</p>
+										<p>{task.description.map((description: string) => <p>{description}</p>)}</p>
 										<p>{task.category}</p>
 										<p>£{task.pricePerUnit}</p>
 									</div>

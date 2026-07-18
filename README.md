@@ -5,7 +5,13 @@ A full-stack invoice management application built with **React**, **TypeScript**
 Designed for freelancers, contractors, and small businesses to quickly create, manage, and export professional invoices.
 
 ---
+## Dashboard
+![Dashboard](./screenshots/Screenshot%202026-07-18%20150050.png)
 
+## PDF 
+![pdf](./screenshots/Screenshot%202026-07-18%20150539.png)
+
+[Invoice maker backend](https://github.com/titchSiobhan/tracker-backend)
 ## Features
 
 ### Invoice Management
@@ -70,23 +76,16 @@ Each generated invoice includes:
 
 ```bash
 git clone <https://github.com/titchSiobhan/tracker-frontend>
-cd invoice-maker
-```
-
-### Backend
-
-```bash
-cd backend
-npm install
-npm run dev
+cd tracker-frontend
 ```
 
 ### Frontend
 
 ```bash
-cd frontend
+cd ../frontend
 npm install
 npm run dev
+
 ```
 
 ---

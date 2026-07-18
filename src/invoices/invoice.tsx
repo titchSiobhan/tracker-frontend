@@ -62,7 +62,7 @@ if (!user?.company)
             {
                 invoices.map((invoice: any) => (
                     <div key={invoice.id} onClick={() => getInvoice(invoice.id)}>
-                        <p className="invoice-date">{invoice.formattedDate.split('/').join('')}</p>
+                        <p className="invoice-date">{invoice.invoiceNumber}</p>
                     </div>
                 ))
             }</div>

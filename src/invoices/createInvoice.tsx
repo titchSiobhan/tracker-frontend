@@ -139,6 +139,7 @@ function CreateInvoicePage({ createInvoice }: CreateInvoicePageProps) {
 					<div key={task.id}>
 						<p>{task.title}</p>
 						<p>{task.description}</p>
+						<p>{task.privateDescription}</p>
 						<p>{task.category}</p>
 						<p>£{task.pricePerUnit} </p>
 						<button

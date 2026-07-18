@@ -8,6 +8,7 @@ function TaskPage() {
 const [createTaskToggle, setCreateTaskToggle] = useState(false);
 const [title, setTitle] = useState('');
 const [description, setDescription] = useState('');
+const [privateDescription, setPrivateDescription] = useState('');
 const [category, setCategory] = useState('');
 const [pricePerUnit, setPricePerUnit] = useState('');
 const { authFetch } = useContext(UserContext);
@@ -22,6 +23,7 @@ type Task = {
     
     title: string;
     description: string;
+    privateDescription: string;
     category: string;
     pricePerUnit: number;
 }
@@ -35,6 +37,7 @@ type Task = {
         const task: Task = {
             title,
             description,
+           privateDescription,
             category,
             pricePerUnit: Number(pricePerUnit),
         }
@@ -70,6 +73,7 @@ type Task = {
         const task: Task = {
             title,
             description,
+            privateDescription,
             category,
             pricePerUnit: Number(pricePerUnit),
         }
@@ -123,6 +127,9 @@ type Task = {
                     <input type="text" placeholder="Task Description" name="description" onChange={(e) =>  {
                         setDescription(e.target.value);
                     }}/>
+                    <input type="text" placeholder="Private Description" name="privateDescription" onChange={(e) => {
+                        setPrivateDescription(e.target.value);
+                    }}/>
                     <input type="text" placeholder="Category" name="category" onChange={(e) => {
                         setCategory(e.target.value)
                     }} />
@@ -138,12 +145,14 @@ type Task = {
                     <div key={task.id} className="group-tasks">
                         <h1>{task.title}</h1>
                         <p>{task.description}</p>
+                        <p>{task.privateDescription}</p>
                         <p>{task.category}</p>
                         <p>£{task.pricePerUnit}</p>
                         <button onClick={() => {
         setEditingTaskId(task.id);
         setTitle(task.title);
         setDescription(task.description);
+        setPrivateDescription(task.privateDescription);
         setCategory(task.category);
         setPricePerUnit(String(task.pricePerUnit));
     }}>Edit Task</button>
@@ -155,6 +164,9 @@ type Task = {
                 }}/>
                 <input type="text" value={description} name="description" onChange={(e) =>  {
                     setDescription(e.target.value);
+                }}/>
+                <input type="text" value={privateDescription} name="privateDescription" onChange={(e) => {
+                    setPrivateDescription(e.target.value);
                 }}/>
                 <input type="text" value={category} name="category" onChange={(e) => {
                     setCategory(e.target.value)
