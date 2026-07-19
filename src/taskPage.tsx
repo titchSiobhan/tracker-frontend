@@ -51,7 +51,7 @@ type Task = {
             body: JSON.stringify(task)
         })
         const data = await response.json();
-        console.log(data)
+       
         setTasks([...tasks, data]);
       toggleCreateTask();
        getTasks();

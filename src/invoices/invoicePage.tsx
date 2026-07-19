@@ -29,7 +29,7 @@ function SingleInvoice() {
 	async function getInvoice(id: string) {
 		const response = await authFetch(`${API_URL}invoice/${id}`);
 		const data = await response.json();
-		console.log(data);
+		
 		setInvoice(data);
 		setJobs(data.jobs);
 	}

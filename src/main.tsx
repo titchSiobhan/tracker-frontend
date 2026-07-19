@@ -11,6 +11,7 @@ import Invoice from './invoices/invoice'
 import SingleInvoice from './invoices/invoicePage'
 import Jobs from './jobs'
 import SingleJobPage from './singleJob'
+import Payments from './income/payments'
 
 let router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ let router = createBrowserRouter([
   {
     path: "/job/:id",
     element: <SingleJobPage />,
+  },
+  {
+    path: "/payments",
+    element: <Payments />,
   },
 ])
 

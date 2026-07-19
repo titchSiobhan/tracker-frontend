@@ -12,7 +12,7 @@ function Login() {
 
 	async function submitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		console.log('data sending...');
+		
 		const response = await fetch(`${API_URL}auth/login`, {
 			method: 'POST',
 			credentials: 'include',
@@ -28,7 +28,7 @@ function Login() {
 		const data = await response.json();
 		if (!response.ok) {
 			alert(data.message);
-			console.log(data.message);
+			
 			return;
 		}
 

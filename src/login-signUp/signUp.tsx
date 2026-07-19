@@ -46,7 +46,7 @@ try {
     }
 
     alert("Signup successful!");
-    console.log(data);
+   
 } catch (error) {
     console.error('error', error);
     alert("An error occurred during signup.");

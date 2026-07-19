@@ -35,7 +35,7 @@ function CompanySettings() {
 	async function getCompany() {
 		const response = await authFetch(`${API_URL}company`);
 		const data = await response.json();
-		console.log(data);
+		
 		if (Array.isArray(data) && data.length > 0) {
     setCompany(data[0]);
 }
@@ -65,7 +65,7 @@ function CompanySettings() {
 			body: JSON.stringify(company),
 		});
 		const data = await response.json();
-		console.log(data);
+		
 		setCompany(data);
 	}
 
@@ -74,7 +74,7 @@ function CompanySettings() {
 	}, []);
 	
 	const hasCompany = company && company.companyName !== '';
-	console.log(hasCompany);
+	
 	return (
 		<>
 			{hasCompany ? (

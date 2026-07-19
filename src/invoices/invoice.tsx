@@ -17,7 +17,7 @@ const navigate = useNavigate();
 async function getInvoices() {
     const response = await authFetch(`${API_URL}invoice`);
     const data = await response.json();
-    console.log(data);
+    
     setInvoices(data);
 }
 
@@ -31,7 +31,7 @@ async function getInvoice(id: string) {
 useEffect(() => {
     getInvoices();
 }, [])
-console.log(invoices);
+
 function createInvoice() {
     setCreateInvoiceToggle(prev => !prev);
 }
@@ -58,11 +58,12 @@ if (!user?.company)
                     </div>
                 )
             }
-            <div className="invoice-list">
+            <div className="invoice-list-area">
             {
                 invoices.map((invoice: any) => (
-                    <div key={invoice.id} onClick={() => getInvoice(invoice.id)}>
+                    <div className="invoice-list-data" key={invoice.id} onClick={() => getInvoice(invoice.id)}>
                         <p className="invoice-date">{invoice.invoiceNumber}</p>
+                        <p >{invoice.jobs[0].job.name}</p>
                     </div>
                 ))
             }</div>

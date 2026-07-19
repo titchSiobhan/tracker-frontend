@@ -32,7 +32,7 @@ async function uploadLogo(e: React.FormEvent<HTMLFormElement>) {
         body: formData
     })
     const data = await response.json();
-    console.log(data);
+    
     setCompany(data.company);
 }
     async function getCompany() {
@@ -40,13 +40,11 @@ async function uploadLogo(e: React.FormEvent<HTMLFormElement>) {
             
     const response = await authFetch(`${API_URL}company/${user.company.id}`);
     const data = await response.json();
-    console.log(data, 'data');
+   
     setCompany(data);
 
 }
-console.log(company, 'company')
-console.log(user, 'user')
-console.log(user?.company?.id, 'company user')
+
 
 type Company = {
   id: string
@@ -63,7 +61,7 @@ type Company = {
     useEffect(() => {
         getCompany();
     }, [])
-console.log(company, 'company')
+
 
     return (
         <>

@@ -39,7 +39,7 @@ function Jobs() {
     async function getJobs() {
         const response = await authFetch(`${API_URL}job`);
         const data = await response.json();
-        console.log(data);
+        
         setJobs(data);
         
     }

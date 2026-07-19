@@ -17,15 +17,15 @@ const navigate = useNavigate();
         const response = await authFetch(`${API_URL}job/${id}`);
 
         const data = await response.json();
-        console.log(data);
+        
         setJob(data);
     }
 
     async function jobInvoices(id: string) {
         const response = await authFetch(`${API_URL}job/invoice/${id}`);
         const data = await response.json();
-        console.log(data);
-        setInvoices(data.invoices);
+        
+         setInvoices(data.invoices);
     }
 
     useEffect(() => {

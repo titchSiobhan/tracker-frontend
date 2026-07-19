@@ -31,6 +31,9 @@ const navigate = useNavigate();
                 <li className="Link">
                     <Link to="/jobs">Clients</Link>
                 </li>
+                <li className="Link">
+                    <Link to="/payments">Income</Link>
+                </li>
                 <li className="logout Link" onClick={handleLogout}>
                     <p >Logout</p>
                 </li>
