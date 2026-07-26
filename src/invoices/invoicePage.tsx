@@ -12,6 +12,8 @@ function SingleInvoice() {
 	const [invoice, setInvoice] = useState({} as any);
 	const navigate = useNavigate();
 	const [jobs, setJobs] = useState<Job[]>([]);
+	const [payDate, setPayDate] = useState('');
+	const [payToggle, setPayToggle] = useState(false);
 	function downloadPDF() {
 		const element = document.getElementById('invoice');
 		if (!element) return;
@@ -27,6 +29,26 @@ function SingleInvoice() {
 			.save();
 	}
 
+async function payInvoice(id: string, e: React.FormEvent<HTMLFormElement>) {
+	e.preventDefault();
+	const ok = window.confirm('Are you sure you want to mark this invoice as paid?');
+	if (!ok) return;
+	if (ok) {
+		const response = await authFetch(`${API_URL}invoice/paid/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({paidDate: new Date(payDate).toISOString()})
+			,
+		});
+		const data = await response.json();
+		console.log(data);
+	}
+}
+	async function isPaid() {
+		setPayToggle( prev => !prev);
+	}
 	async function deleteInvoice(id: string) {
 		const ok = window.confirm('Are you sure you want to delete this invoice?');
 		if (!ok) return;
@@ -94,6 +116,20 @@ function SingleInvoice() {
 					<div className="delete">
 						<button onClick={() => deleteInvoice(invoice.id)}>Delete</button>
 					</div>
+					<div className="paid"><button onClick={() =>isPaid()}>Paid</button></div>
+					{payToggle && (
+						<div className="paid">
+						<form onSubmit={(e) => payInvoice(invoice.id, e)}>
+						
+							<input className="date"
+						type="date"
+						name="date"
+						onChange={(e) => setPayDate(e.target.value)}
+					/>
+					<button type="submit">Submit</button>
+					</form>
+						</div>
+					)}
 				</div>
 				<div className="invoice" id="invoice">
 					{user?.company?.companyImageLarge ? (

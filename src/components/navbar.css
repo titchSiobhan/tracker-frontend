@@ -33,11 +33,44 @@ nav {
 	justify-content: space-around;
 	grid-column: 1 / 3;
 	grid-row-start: 1;
-	width: 250px;
+
 	height: 100vh;
-	position: fixed;
-left: 0;
-top: 0;
+	
+
 z-index: 1;
 box-shadow: var(--accent1) 0px 4px 12px;
 }
+.menu {
+	display: none;}
+
+@media screen and (max-width: 768px) {
+	nav {
+		width: 250px;
+		height: 100vh;
+		position: fixed;
+		left: -100%;
+		z-index: 1;
+		transition: all 0.5s ease-in-out;
+		
+	}
+	.active {
+		left: 0;
+	}
+
+	li, .Link, a {
+		font-size: 1.3rem;
+	}
+	.menu {
+		display: flex;
+		right: 0;
+		position: absolute;
+		top: 0;
+		margin: 1rem;
+		width: 50px;
+		height: 50px;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+}
+
