@@ -64,6 +64,7 @@ if (!user?.company)
                     <div className="invoice-list-data" key={invoice.id} onClick={() => getInvoice(invoice.id)}>
                         <p className="invoice-date">{invoice.invoiceNumber}</p>
                         <p >{invoice.jobs[0].job.name}</p>
+                        <p>{invoice.dateCreated.split('T')[0]}</p>
                     </div>
                 ))
             }</div>

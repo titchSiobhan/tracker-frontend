@@ -26,12 +26,26 @@ function SingleInvoice() {
 			})
 			.save();
 	}
+
+	async function deleteInvoice(id: string) {
+		const ok = window.confirm('Are you sure you want to delete this invoice?');
+		if (!ok) return;
+		if (ok) {
+			const response = await authFetch(`${API_URL}invoice/delete/${id}`, {
+				method: 'DELETE',
+			});
+			const data = await response.json();
+			console.log(data);
+			navigate('/invoice');
+		}
+	}
 	async function getInvoice(id: string) {
 		const response = await authFetch(`${API_URL}invoice/${id}`);
 		const data = await response.json();
 		
 		setInvoice(data);
 		setJobs(data.jobs);
+		
 	}
 	useEffect(() => {
 		getInvoice(window.location.pathname.split('/')[2]);
@@ -76,6 +90,9 @@ function SingleInvoice() {
 					</div>
 					<div className="download">
 						<button onClick={downloadPDF}>Download</button>
+					</div>
+					<div className="delete">
+						<button onClick={() => deleteInvoice(invoice.id)}>Delete</button>
 					</div>
 				</div>
 				<div className="invoice" id="invoice">

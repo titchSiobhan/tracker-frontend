@@ -57,7 +57,7 @@ const navigate = useNavigate();
          { invoices?.length > 0 ?
             invoices?.map((invoice: any) => (
                 <div key={invoice.invoice.id} className="invoice-list">
-                    <p onClick={() => goToInvoice(invoice.invoice.id)}>{format(invoice.invoice.invoiceNumber, 'yy/MM/dd/hh/mm').split('/').join('')}</p>
+                    <p onClick={() => goToInvoice(invoice.invoice.id)}>{invoice.invoice.invoiceNumber.split('/').join('')}</p>
                 </div>  
             )) : <p>No Invoices</p>
          }
